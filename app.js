@@ -5,7 +5,7 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const app = express();
 
-const bcrypt = require("express");
+const bcrypt = require("bcrypt");
 
 app.use(express.json());
 
