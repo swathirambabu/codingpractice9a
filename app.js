@@ -57,7 +57,7 @@ app.post("/register", async (request, response) => {
 
 app.post("/login", async (request, response) => {
   const { username, password } = request.body;
-  const selectUserQuery = `select * from user where username=${username}; `;
+  const selectUserQuery = `select * from user where username='${username}'; `;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
     response.send(400);
@@ -82,10 +82,7 @@ app.put("/change-password", async (request, response) => {
     response.send(400);
     response.send("Invalid user");
   } else {
-    const isValidPassword = await bcrypt.compare(
-      oldPassword,
-      dbUser.newPassword
-    );
+    const isValidPassword = await bcrypt.compare(oldPassword, dbUser.Password);
     if (isValidPassword === true) {
       if (validatePassword(newPassword)) {
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
