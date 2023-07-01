@@ -84,7 +84,7 @@ app.put("/change-password", async (request, response) => {
   } else {
     const isPasswordMatched = await bcrypt.compare(
       oldPassword,
-      dbUser.Password
+      dbUser.password
     );
     if (isPasswordMatched === true) {
       if (validatePassword(newPassword)) {
